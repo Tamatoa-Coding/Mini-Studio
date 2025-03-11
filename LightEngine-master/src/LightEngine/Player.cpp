@@ -3,7 +3,7 @@
 void Player::Fall(float deltaTime)
 {
 	float gravity = 9.81f;
-	float speed = 25.f;
+	float speed = 30.f;
 	sf::Vector2f pPos = GetPosition();
 
 	mGravitySpeed += speed * gravity * deltaTime;
@@ -27,7 +27,7 @@ void Player::Jump()
 	{
 		if (jumpCount < 2)
 		{
-			mGravitySpeed -= 200;
+			mGravitySpeed = -225;
 			isJumping = true;
 			std::cout << "Jump" << std::endl;
 			jumpCount++;
@@ -71,12 +71,11 @@ void Player::Move()
 			vitesse = vitesse * 1.5;
 		}
 
-		float xMove = 100;
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-			SetPosition(GetPosition().x + 5 + vitesse, GetPosition().y);
+			SetPosition(GetPosition().x + 3 + vitesse, GetPosition().y);
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
-			SetPosition(GetPosition().x - 5 - vitesse, GetPosition().y);
+			SetPosition(GetPosition().x - 3 - vitesse, GetPosition().y);
 		}
 	}
 }

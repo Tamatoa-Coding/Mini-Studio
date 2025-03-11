@@ -9,6 +9,8 @@ void SceneGame::OnInitialize()
 	pPlayer = CreateEntity<Player>(20, sf::Color::Red);
 	pPlayer->SetPosition(640, 600);
 	pPlayer->SetRigidBody(true);
+
+	pEnemy = CreateEntity<Player>(30, sf::Color::Blue);
 }
 
 void SceneGame::OnEvent(const sf::Event& event)

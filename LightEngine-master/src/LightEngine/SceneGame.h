@@ -8,6 +8,7 @@ class Player;
 class SceneGame : public Scene
 {
 	DummyEntity* mPlayer;
+	Player* pEnemy;
 	Player* pPlayer;
 
 public:

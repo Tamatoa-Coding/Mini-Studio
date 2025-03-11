@@ -2,13 +2,14 @@
 
 #include "Scene.h"
 
+class Enemy;
 class DummyEntity;
 class Player;
 
 class SceneGame : public Scene
 {
 	DummyEntity* mPlayer;
-	Player* pEnemy;
+	Enemy* pEnemy;
 	Player* pPlayer;
 
 public:

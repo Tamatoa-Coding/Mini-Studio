@@ -3,6 +3,7 @@
 
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
 
 namespace sf 
 {
@@ -10,7 +11,16 @@ namespace sf
     class Color;
 }
 
+
+struct AABBCollider
+{
+	float xMin, yMin;
+	float xMax, yMax;
+	float xSize, ySize;
+};
+
 class Scene;
+class Player;
 
 class Entity
 {
@@ -22,7 +32,9 @@ class Entity
     };
 
 protected:
-    sf::CircleShape mShape;
+
+	AABBCollider* mBoxCollider;
+    sf::RectangleShape* mShape;
     sf::Vector2f mDirection;
 	Target mTarget;
     float mSpeed = 0.f;
@@ -34,15 +46,22 @@ public:
 	bool GoToDirection(int x, int y, float speed = -1.f);
     bool GoToPosition(int x, int y, float speed = -1.f);
     void SetPosition(float x, float y, float ratioX = 0.5f, float ratioY = 0.5f);
+	void SetCollider(float posX, float posY, float height, float width);
 	void SetDirection(float x, float y, float speed = -1.f);
 	void SetSpeed(float speed) { mSpeed = speed; }
 	void SetTag(int tag) { mTag = tag; }
-	float GetRadius() const { return mShape.getRadius(); }
+	const int GetTag() { return mTag; }
+	
+	//float GetRadius() const;
+	float GetHeight() const;
+	float GetWidth() const;
 	void SetRigidBody(bool isRigitBody) { mRigidBody = isRigitBody; }
 	bool IsRigidBody() const { return mRigidBody; }
 
     sf::Vector2f GetPosition(float ratioX = 0.5f, float ratioY = 0.5f) const;
-	sf::Shape* GetShape() { return &mShape; }
+	sf::Vector2f GetColliderPos(float ratioX = 0.5f, float ratioY = 0.5f) const;
+	sf::Vector2f GetColliderSize();
+	sf::Shape* GetShape() { return mShape; }
 
 	bool IsTag(int tag) const { return mTag == tag; }
     bool IsColliding(Entity* other) const;
@@ -54,11 +73,11 @@ public:
 	template<typename T>
 	T* GetScene() const;
 
+	template<typename T>
+	T* CreateRectangle(float height, float width, const sf::Color& color);
+
     Scene* GetScene() const;
 	float GetDeltaTime() const;
-
-    template<typename T>
-    T* CreateEntity(float radius, const sf::Color& color);
 
 protected:
     Entity() = default;
@@ -71,7 +90,7 @@ protected:
 	
 private:
     void Update();
-	void Initialize(float radius, const sf::Color& color);
+	void InitializeRect(float height, float width, const sf::Color& color);
 	void Repulse(Entity* other);
 
     friend class GameManager;

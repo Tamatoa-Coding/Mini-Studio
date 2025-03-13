@@ -1,6 +1,6 @@
 #include "Player.h"
 
-void Player::Fall(float deltaTime)
+	void Player::Fall(float deltaTime)
 {
 	float gravity = 9.81f;
 	float speed = 30.f;
@@ -18,9 +18,28 @@ void Player::Fall(float deltaTime)
 	SetPosition(pPos.x, pPos.y);
 }
 
+void Player::Reset()
+{
+	sf::Vector2f pPosCenter = sf::Vector2f(GameManager::Get()->GetScene()->GetWindowWidth(),
+		GameManager::Get()->GetScene()->GetWindowHeight());
+	SetPosition(pPosCenter.x / 2, pPosCenter.y / 4);
+	mGravitySpeed = 0;
+}
+
 void Player::Jump()
 {
-	sf::Vector2f mPos = GetPosition();
+	if (GetState() == TOP || mNbrJump >= 2 || mClockDoubleJump.getElapsedTime().asSeconds() < jumpCooldown)
+		return;
+
+	sf::Vector2f pPos = GetPosition(0.5f, 0.5f);
+	SetPosition(pPos.x, pPos.y - 1);
+	SetCollider(pPos.x, pPos.y - 1, mBoxCollider->ySize, mBoxCollider->xSize);
+	mGravity = true;
+	mGravitySpeed = -350;
+	mNbrJump++;
+	mClockDoubleJump.restart();
+
+	/*sf::Vector2f mPos = GetPosition();
 
 	if (sf::Joystick::isButtonPressed(0, 1) && !isJumping ||
 		sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !isJumping)
@@ -43,7 +62,7 @@ void Player::Jump()
 		!sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
 		isJumping = false;
-	}
+	}*/
 }
 
 void Player::Move()
@@ -109,4 +128,3 @@ void Player::OnUpdate()
 	//TakeHit();
 
 }
-

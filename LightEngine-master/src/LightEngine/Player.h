@@ -1,8 +1,8 @@
 #pragma once
-#include "Entity.h"
+#include "PhysicalEntity.h"
 #include <iostream>
 
-class Player : public Entity
+class Player : public PhysicalEntity
 {
 	bool mGravity = false;
 	float mGravitySpeed = 0.f;

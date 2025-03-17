@@ -118,6 +118,12 @@ void SampleScene::OnEvent(const sf::Event& event)
 		//}
 	}
 
+	//Jump
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
+		std::cout << "jump";
+		pEntity1->Jump();
+	}
+
 	//Keyboard inputs
 	else {
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q)) {
@@ -127,6 +133,10 @@ void SampleScene::OnEvent(const sf::Event& event)
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
 			pEntity1->Move(GetDeltaTime(), 1);
 			pEntity1->setLastDirection(1);
+		}
+		else {
+			std::cout << "Stop";
+			pEntity1->SetDirection(0, 0);
 		}
 
 		//Shoot
@@ -145,12 +155,6 @@ void SampleScene::OnEvent(const sf::Event& event)
 			{
 				bullet->SetDirection(-1, 0, 500);
 			}
-		}
-
-		//Jump
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
-			std::cout << "jump";
-			pEntity1->Jump();
 		}
 
 		//Reset Position
@@ -185,7 +189,7 @@ void SampleScene::OnEvent(const sf::Event& event)
 void SampleScene::OnUpdate()
 {
 	const char* life = "Life : " + pEntity1->mLife;
-	Debug::DrawText(10, 20, "Life : " + pEntity1->mLife, sf::Color::Black);
+	Debug::DrawText(10, 20, life, sf::Color::Black);
 
 	//std::cout << pEntity1->GetState() << std::endl;
 	for (int i = 0; i < mPlateforms.size(); i++)

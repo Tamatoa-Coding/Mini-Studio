@@ -20,8 +20,6 @@ void SampleScene::OnInitialize()
 	pEntity1->SetPosition(101, 100);
 	pEntity1->SetCollider(101, 100, 16, 16);
 	pEntity1->SetRigidBody(true);
-
-
 }
 
 void SampleScene::OnEvent(const sf::Event& event)
@@ -129,10 +127,6 @@ void SampleScene::OnEvent(const sf::Event& event)
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
 			pEntity1->Move(GetDeltaTime(), 1);
 			pEntity1->setLastDirection(1);
-		}
-		else {
-			std::cout << "Stop";
-			pEntity1->SetDirection(0, 0);
 		}
 
 		//Shoot

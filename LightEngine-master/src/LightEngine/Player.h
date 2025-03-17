@@ -8,15 +8,31 @@ class Player : public PhysicalEntity
 	float mGravitySpeed = 0.f;
 	bool isJumping = false;
 	int jumpCount = 0;
-	int MaxLife = 3;
-	int Life = MaxLife;
 
+	sf::Clock mClockDoubleJump;
+	float jumpCooldown = 0.5f;
+	int lastDirection = 1;
+
+	
 public:
-	void Fall(float deltaTime);
+
 	void Jump();
-	void Move();
 	void TakeHit();
 	int GetLife() { return Life; }
-	void OnUpdate() override;
+
+	int getLastDirection();
+	void setLastDirection(int dir);
+	void Move(float deltaTime, int key);
+	void Reset();
+	void TakeHit();
+	void Dash(float deltaTime);
+
+	int mLife = MaxLife;
+	int MaxLife = 3;
+	float dashTime = 0.5f;
+	float dashTimer = 0.0f;
+	float dashCooldown = 2.5f;
+	float shootCooldown = 0.5f;
+
 };
 

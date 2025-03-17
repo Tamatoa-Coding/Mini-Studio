@@ -1,21 +1,17 @@
 #include "Player.h"
 
-void Player::Fall(float deltaTime)
+int Player::getLastDirection()
 {
-	float gravity = 9.81f;
-	float speed = 30.f;
-	sf::Vector2f pPos = GetPosition();
-
-	mGravitySpeed += speed * gravity * deltaTime;
-	pPos.y += mGravitySpeed * deltaTime;
-
-	if (pPos.y > 600)
-{
-		pPos.y = 600;
-	mGravitySpeed = 0;
+	return lastDirection;
 }
 
-	SetPosition(pPos.x, pPos.y);
+void Player::setLastDirection(int dir)
+{
+	lastDirection = dir;
+}
+
+void Player::Move(float deltaTime, int key){
+	SetDirection(key, 0, 250);
 }
 
 void Player::Jump()
@@ -45,68 +41,16 @@ void Player::Jump()
 	}
 }
 
-void Player::Move()
-{
-	float vitesse = 2.f;
-	if (sf::Joystick::isConnected(0)) {
-
-		float x = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
-		//Drift out 
-		if (x > 0.f && x < 10.f || x < 0.f && x > -10.f)
-		{
-			x = 0.f;
-		}
-		//Boutton R2 Appuy� = sprint
-		if (sf::Joystick::isButtonPressed(0, 7))
-		{
-			vitesse = vitesse * 1.5;
-			std::cout << "Bouton 1" << std::endl;
-		}
-		SetDirection(x, 0, vitesse);
-		std::cout << "X : " << x << std::endl;
-	}
-
-	else{
-		if (sf::Keyboard::isKeyPressed (sf::Keyboard::LShift)) {
-			vitesse = vitesse * 1.5;
-		}
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-			SetPosition(GetPosition().x + 3 + vitesse, GetPosition().y);
-		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
-			SetPosition(GetPosition().x - 3 - vitesse, GetPosition().y);
-		}
-	}
-}
-
 void Player::TakeHit()
 {
-	////test life d�cr�mentations
-	//if (sf::Joystick::isButtonPressed(0, 3))
-	//{
-	//	Life--;
-	//	if (Life <= 0)
-	//	{
-	//		//GameOver
-	//	}
-	//}
-
-	Life--;
-	if (Life <= 0)
+	mLife--;
+	if (mLife <= 0)
 	{
 		//GameOver
 	}
-
 }
 
-void Player::OnUpdate()
+void Player::Dash(float deltaTime)
 {
-	float dt = GetDeltaTime();
-	Fall(dt);
-	Jump();
-	Move();	
-	//TakeHit();
-
+		SetDirection(lastDirection, 0, 800); // droite ou gauche
 }
-

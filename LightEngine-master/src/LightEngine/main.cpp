@@ -4,7 +4,6 @@
 
 #include "GameManager.h"
 #include "SampleScene.h"
-#include "SceneGame.h"
 
 #include <cstdlib>
 #include <crtdbg.h>
@@ -15,7 +14,7 @@ int main()
 
 	pInstance->CreateWindow(1280, 720, "SceneGame", 60, sf::Color::Black);
 	
-	pInstance->LaunchScene<SceneGame>();
+	pInstance->LaunchScene<SampleScene>();
 
 	
 

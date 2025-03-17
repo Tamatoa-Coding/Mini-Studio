@@ -1,5 +1,6 @@
 #pragma once
 #include "PhysicalEntity.h"
+#include <SFML/Graphics.hpp>
 #include <iostream>
 
 class Player : public PhysicalEntity
@@ -18,13 +19,11 @@ public:
 
 	void Jump();
 	void TakeHit();
-	int GetLife() { return Life; }
 
 	int getLastDirection();
 	void setLastDirection(int dir);
 	void Move(float deltaTime, int key);
 	void Reset();
-	void TakeHit();
 	void Dash(float deltaTime);
 
 	int mLife = MaxLife;

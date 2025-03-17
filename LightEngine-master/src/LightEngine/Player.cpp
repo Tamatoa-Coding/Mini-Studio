@@ -10,6 +10,14 @@ void Player::setLastDirection(int dir)
 	lastDirection = dir;
 }
 
+void Player::Reset() {
+	sf::Vector2f pPosCenter = sf::Vector2f(GameManager::Get()->GetScene()->GetWindowWidth(),
+		GameManager::Get()->GetScene()->GetWindowHeight());
+	SetPosition(pPosCenter.x / 2, pPosCenter.y / 4);
+	mGravitySpeed = 0;
+}
+
+
 void Player::Move(float deltaTime, int key){
 	SetDirection(key, 0, 250);
 }
@@ -18,9 +26,6 @@ void Player::Jump()
 {
 	sf::Vector2f mPos = GetPosition();
 
-	if (sf::Joystick::isButtonPressed(0, 1) && !isJumping ||
-		sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !isJumping)
-	{
 		if (jumpCount < 2)
 		{
 			mGravitySpeed = -200;
@@ -33,8 +38,7 @@ void Player::Jump()
 			jumpCount = 0;
 		}
 
-	}
-	else if (!sf::Joystick::isButtonPressed(0, 1) && 
+	if (!sf::Joystick::isButtonPressed(0, 1) && 
 		!sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
 		isJumping = false;

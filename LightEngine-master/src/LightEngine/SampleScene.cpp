@@ -121,6 +121,7 @@ void SampleScene::OnEvent(const sf::Event& event)
 	}
 
 	//Keyboard inputs
+	else {
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q)) {
 			pEntity1->Move(GetDeltaTime(), -1);
 			pEntity1->setLastDirection(-1);
@@ -129,7 +130,12 @@ void SampleScene::OnEvent(const sf::Event& event)
 			pEntity1->Move(GetDeltaTime(), 1);
 			pEntity1->setLastDirection(1);
 		}
+		else {
+			std::cout << "Stop";
+			pEntity1->SetDirection(0, 0);
+		}
 
+		//Shoot
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter)) {
 			Entity* bullet = CreateRectangle<Bullets>(16, 8, sf::Color::Blue);
 			bullet->SetPosition(pEntity1->GetPosition().x, pEntity1->GetPosition().y);
@@ -146,20 +152,23 @@ void SampleScene::OnEvent(const sf::Event& event)
 				bullet->SetDirection(-1, 0, 500);
 			}
 		}
-		
+
 		//Jump
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
+			std::cout << "jump";
 			pEntity1->Jump();
 		}
 
 		//Reset Position
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::R)) {
 			pEntity1->Reset();
+			pEntity1->SetDirection(0, 0);
 		}
+	}
 
-		if (event.type != sf::Event::EventType::MouseButtonPressed) {
-			return;
-		}
+	if (event.type != sf::Event::EventType::MouseButtonPressed) {
+		return;
+	}
 
 	if (event.mouseButton.button == sf::Mouse::Button::Left)
 	{
@@ -168,6 +177,7 @@ void SampleScene::OnEvent(const sf::Event& event)
 		tempEntityGrass->SetPosition(event.mouseButton.x, event.mouseButton.y);
 		tempEntityGrass->SetRigidBody(true);*/
 	}
+
 }
 
 //void SampleScene::TrySetSelectedEntity(PhysicalEntity* pEntity, int x, int y)

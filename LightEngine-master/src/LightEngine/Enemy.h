@@ -1,8 +1,9 @@
 #pragma once
 #include "Entity.h"
+#include "PhysicalEntity.h"
 
 class Enemy :
-    public Entity
+    public PhysicalEntity
 {
     bool mGravity = false;
     float mGravitySpeed = 0.f;

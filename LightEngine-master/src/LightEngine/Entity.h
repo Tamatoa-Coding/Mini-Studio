@@ -58,6 +58,8 @@ public:
 	void SetRigidBody(bool isRigitBody) { mRigidBody = isRigitBody; }
 	bool IsRigidBody() const { return mRigidBody; }
 
+	const AABBCollider* GetCollider() { return mBoxCollider; }
+
     sf::Vector2f GetPosition(float ratioX = 0.5f, float ratioY = 0.5f) const;
 	sf::Vector2f GetColliderPos(float ratioX = 0.5f, float ratioY = 0.5f) const;
 	sf::Vector2f GetColliderSize();

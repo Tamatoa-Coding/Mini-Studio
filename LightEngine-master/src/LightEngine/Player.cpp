@@ -1,23 +1,5 @@
 #include "Player.h"
 
-	void Player::Fall(float deltaTime)
-{
-	float gravity = 9.81f;
-	float speed = 30.f;
-	sf::Vector2f pPos = GetPosition();
-
-	mGravitySpeed += speed * gravity * deltaTime;
-	pPos.y += mGravitySpeed * deltaTime;
-
-	if (pPos.y > 600)
-	{
-		pPos.y = 600;
-		mGravitySpeed = 0;
-	}
-
-	SetPosition(pPos.x, pPos.y);
-}
-
 void Player::Reset()
 {
 	sf::Vector2f pPosCenter = sf::Vector2f(GameManager::Get()->GetScene()->GetWindowWidth(),
@@ -98,6 +80,11 @@ void Player::Move()
 		}
 	}
 }
+
+void Player::Move(float deltatime, int key) {
+	SetDirection(key, 0, 250);
+}
+
 
 void Player::TakeHit()
 {

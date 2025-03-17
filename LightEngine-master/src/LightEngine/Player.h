@@ -7,10 +7,7 @@
 
 class Player : public PhysicalEntity
 {
-	bool mGravity = false;
-	float mGravitySpeed = 0.f;
 	bool isJumping = false;
-	int jumpCount = 0;
 	int MaxLife = 3;
 	int Life = MaxLife;
 
@@ -18,7 +15,6 @@ class Player : public PhysicalEntity
 	float jumpCooldown = 0.5f;
 	
 public:
-	void Fall(float deltaTime);
 	void Reset();
 	void Jump();
 	void Move();

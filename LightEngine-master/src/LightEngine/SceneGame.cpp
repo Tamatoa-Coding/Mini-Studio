@@ -7,23 +7,26 @@
 
 void SceneGame::OnInitialize()
 {
-	pPlayer = CreateEntity<Player>(20, sf::Color::Red);
+	pPlayer = CreateRectangle<Player>(16,16, sf::Color::Red);
 	pPlayer->SetPosition(640, 600);
 	pPlayer->SetRigidBody(true);
 
-	pEnemy = CreateEntity<Enemy>(30, sf::Color::Blue);
+	pEnemy = CreateRectangle<Enemy>(16,16, sf::Color::Blue);
 	pEnemy->SetPosition(800, 600);
 	pEnemy->SetRigidBody(true);
 }
 
 void SceneGame::OnEvent(const sf::Event& event)
 {
-	if (pPlayer->IsColliding(pEnemy)) { //If player touches Enemy
+	const AABBCollider* enemyCollider = pEnemy->GetCollider();
+	const AABBCollider* playerCollider = pPlayer->GetCollider();
+
+	if (pPlayer->IsColliding(*enemyCollider)) { //If player touches Enemy
 		pPlayer->TakeHit(); //Player dies
 	}
 
-	if ((-pPlayer->GetPosition().y + 600 + 40) >= pEnemy->GetRadius() &&
-		pEnemy->IsColliding(pPlayer)) { // If player jumps on Enemy
+	if (pPlayer->GetPosition().y+16 <= pEnemy->GetPosition().y &&
+		pEnemy->IsColliding(*playerCollider)) { // If player jumps on Enemy
 		pEnemy->getHit(); //Enemy dies
 	}
 }

@@ -1,5 +1,4 @@
 #pragma once
-
 #include "PhysicalEntity.h"
 #include <SFML/Graphics.hpp>
 #include "Entity.h"
@@ -10,7 +9,6 @@ class Player : public PhysicalEntity
 	bool isJumping = false;
 	int MaxLife = 3;
 	int Life = MaxLife;
-
 	sf::Clock mClockDoubleJump;
 	float jumpCooldown = 0.5f;
 	

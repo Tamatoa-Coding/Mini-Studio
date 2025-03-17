@@ -8,6 +8,24 @@ void Player::Reset()
 	mGravitySpeed = 0;
 }
 
+void Player::Fall(float deltaTime)
+{
+	float gravity = 9.81f;
+	float speed = 25.f;
+	sf::Vector2f pPos = GetPosition();
+
+	mGravitySpeed += speed * gravity * deltaTime;
+	pPos.y += mGravitySpeed * deltaTime;
+
+	if (pPos.y > 600)
+{
+		pPos.y = 600;
+	mGravitySpeed = 0;
+}
+
+	SetPosition(pPos.x, pPos.y);
+}
+
 void Player::Jump()
 {
 	if (GetState() == TOP || mNbrJump >= 2 || mClockDoubleJump.getElapsedTime().asSeconds() < jumpCooldown)
@@ -28,9 +46,8 @@ void Player::Jump()
 	{
 		if (jumpCount < 2)
 		{
-			mGravitySpeed = -225;
+			mGravitySpeed = -200;
 			isJumping = true;
-			std::cout << "Jump" << std::endl;
 			jumpCount++;
 		}
 
@@ -58,13 +75,6 @@ void Player::Move()
 		{
 			x = 0.f;
 		}
-		//Boutton R2 Appuyé = sprint
-		if (sf::Joystick::isButtonPressed(0, 7))
-		{
-			vitesse = vitesse * 1.5;
-			std::cout << "Bouton 1" << std::endl;
-		}
-		SetDirection(x, 0, vitesse);
 		std::cout << "X : " << x << std::endl;
 	}
 	else{
@@ -79,6 +89,12 @@ void Player::Move()
 			SetPosition(GetPosition().x - 3 - vitesse, GetPosition().y);
 		}
 	}
+	//Boutton R2 Appuyï¿½ = sprint
+	if (sf::Joystick::isButtonPressed(0, 7))
+	{
+		vitesse = vitesse * 1.5;
+	}
+	SetDirection(x, 0, vitesse);
 }
 
 void Player::Move(float deltatime, int key) {
@@ -88,7 +104,7 @@ void Player::Move(float deltatime, int key) {
 
 void Player::TakeHit()
 {
-	//test life décrémentations
+	////test life dï¿½crï¿½mentations
 	//if (sf::Joystick::isButtonPressed(0, 3))
 	//{
 	//	Life--;
@@ -113,5 +129,4 @@ void Player::OnUpdate()
 	Jump();
 	Move();	
 	//TakeHit();
-
 }

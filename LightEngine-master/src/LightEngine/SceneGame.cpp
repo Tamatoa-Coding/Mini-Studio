@@ -2,8 +2,9 @@
 #include <iostream>
 #include "Player.h"
 #include "Enemy.h"
-
 #include "Debug.h"
+#include "Base.h"
+#include <SFML/Graphics.hpp>
 
 void SceneGame::OnInitialize()
 {
@@ -33,6 +34,7 @@ void SceneGame::OnEvent(const sf::Event& event)
 
 void SceneGame::OnUpdate()
 {
-	std::string text = "Life : " + std::to_string(pPlayer->GetLife());
-	Debug::DrawText(10, 10, text, sf::Color::White);
+    std::string text = "Life : " + std::to_string(pPlayer->GetLife());
+    Debug::DrawText(10, 10, text, sf::Color::White);
+
 }

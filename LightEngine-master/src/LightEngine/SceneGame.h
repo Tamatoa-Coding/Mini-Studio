@@ -8,9 +8,8 @@ class Player;
 
 class SceneGame : public Scene
 {
-	DummyEntity* mPlayer;
-	Enemy* pEnemy;
 	Player* pPlayer;
+	Enemy* pEnemy;
 
 public:
 	void OnInitialize() override;

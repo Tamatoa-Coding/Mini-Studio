@@ -10,10 +10,10 @@ void Player::Fall(float deltaTime)
 	pPos.y += mGravitySpeed * deltaTime;
 
 	if (pPos.y > 600)
-	{
+{
 		pPos.y = 600;
-		mGravitySpeed = 0;
-	}
+	mGravitySpeed = 0;
+}
 
 	SetPosition(pPos.x, pPos.y);
 }
@@ -27,9 +27,8 @@ void Player::Jump()
 	{
 		if (jumpCount < 2)
 		{
-			mGravitySpeed = -225;
+			mGravitySpeed = -200;
 			isJumping = true;
-			std::cout << "Jump" << std::endl;
 			jumpCount++;
 		}
 
@@ -57,7 +56,7 @@ void Player::Move()
 		{
 			x = 0.f;
 		}
-		//Boutton R2 Appuyé = sprint
+		//Boutton R2 Appuyï¿½ = sprint
 		if (sf::Joystick::isButtonPressed(0, 7))
 		{
 			vitesse = vitesse * 1.5;
@@ -66,6 +65,7 @@ void Player::Move()
 		SetDirection(x, 0, vitesse);
 		std::cout << "X : " << x << std::endl;
 	}
+
 	else{
 		if (sf::Keyboard::isKeyPressed (sf::Keyboard::LShift)) {
 			vitesse = vitesse * 1.5;
@@ -82,7 +82,7 @@ void Player::Move()
 
 void Player::TakeHit()
 {
-	//test life décrémentations
+	////test life dï¿½crï¿½mentations
 	//if (sf::Joystick::isButtonPressed(0, 3))
 	//{
 	//	Life--;

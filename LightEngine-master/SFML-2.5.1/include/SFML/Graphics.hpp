@@ -58,7 +58,6 @@
 #include <SFML/Graphics/View.hpp>
 
 
-#endif // SFML_GRAPHICS_HPP
 
 ////////////////////////////////////////////////////////////
 /// \defgroup graphics Graphics module

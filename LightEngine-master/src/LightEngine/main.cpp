@@ -16,7 +16,6 @@ int main()
 	pInstance->CreateWindow(1280, 720, "SceneGame", 60, sf::Color::Black);
 	
 	pInstance->LaunchScene<SceneGame>();
-
 	
 
 	return 0;

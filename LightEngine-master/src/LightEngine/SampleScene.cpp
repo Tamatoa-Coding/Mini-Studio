@@ -26,7 +26,6 @@ void SampleScene::OnInitialize()
 	pEnemy->SetCollider(200, 100, 16, 16);
 	pEnemy->SetRigidBody(true);
 
-
 }
 
 void SampleScene::OnEvent(const sf::Event& event)
@@ -106,7 +105,7 @@ void SampleScene::OnEvent(const sf::Event& event)
         }
         else
         {
-            pEntity1->dashTimer = 0; // Réinitialiser le dashTimer si le cooldown n'est pas encore terminé
+            pEntity1->dashTimer = 0; // Rï¿½initialiser le dashTimer si le cooldown n'est pas encore terminï¿½
         }
     }
 
@@ -158,6 +157,65 @@ void SampleScene::OnEvent(const sf::Event& event)
         tempEntityGrass->SetPosition(event.mouseButton.x, event.mouseButton.y);
         tempEntityGrass->SetRigidBody(true);*/
     }
+
+	//Jump
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
+		std::cout << "jump";
+		pEntity1->Jump();
+	}
+
+	//Keyboard inputs
+	else {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q)) {
+			pEntity1->Move(GetDeltaTime(), -1);
+			pEntity1->setLastDirection(-1);
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
+			pEntity1->Move(GetDeltaTime(), 1);
+			pEntity1->setLastDirection(1);
+		}
+		else {
+			std::cout << "Stop";
+			pEntity1->SetDirection(0, 0);
+		}
+
+		//Shoot
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter)) {
+			Entity* bullet = CreateRectangle<Bullets>(16, 8, sf::Color::Blue);
+			bullet->SetPosition(pEntity1->GetPosition().x, pEntity1->GetPosition().y);
+			bullet->SetRigidBody(true);
+
+			//Shoot right
+			if (pEntity1->getLastDirection() == 1)
+			{
+				bullet->SetDirection(1, 0, 500);
+			}
+			//Shoot left
+			else if (pEntity1->getLastDirection() == -1)
+			{
+				bullet->SetDirection(-1, 0, 500);
+			}
+		}
+
+		//Reset Position
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::R)) {
+			pEntity1->Reset();
+			pEntity1->SetDirection(0, 0);
+		}
+	}
+
+	if (event.type != sf::Event::EventType::MouseButtonPressed) {
+		return;
+	}
+
+	if (event.mouseButton.button == sf::Mouse::Button::Left)
+	{
+		/*ObjectEntity* tempEntityGrass = CreateRectangle<ObjectEntity>(64, 64, sf::Color::Green);
+		mPlateforms.push_back(tempEntityGrass);
+		tempEntityGrass->SetPosition(event.mouseButton.x, event.mouseButton.y);
+		tempEntityGrass->SetRigidBody(true);*/
+	}
+
 }
 
 
@@ -173,7 +231,7 @@ void SampleScene::OnEvent(const sf::Event& event)
 void SampleScene::OnUpdate()
 {
 	const char* life = "Life : " + pEntity1->mLife;
-	Debug::DrawText(10, 20, "Life : " + pEntity1->mLife, sf::Color::Black);
+	Debug::DrawText(10, 20, life, sf::Color::Black);
 
 	
 	for (int i = 0; i < mPlateforms.size(); i++)

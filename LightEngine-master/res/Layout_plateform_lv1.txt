@@ -3,7 +3,7 @@
 ----------------------------------------
 ----------------------------------------
 ----------------------------------------
-----------------------S-----------------
+----------------------ETTTA-------------
 -------S--------------------------------
 ----------------------------------------
 ----------------ETA-----------------ETA-
@@ -18,7 +18,7 @@
 -----ETTTA---------------ETTTA----------
 ----------------------------------------
 ----------------------------------------
-GGGGGGGGGGGGGGGGGGGGC------PGGGGGGGGGGGG
-DDDDDDDDDDDDDDDDDDDDLGGGGGGRDDDDDDDDDDDD
-DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
-DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+GGGGGGGGGC---PGGGGGGC------PGGGGGGGGGC--PGGGGGGC
+DDDDDDDDDI---JDDDDDDLGGGGGGRDDDDDDDDDI--JDDDDDDL
+DDDDDDDDDI---JDDDDDDDDDDDDDDDDDDDDDDDI--JDDDDDDD
+DDDDDDDDDI---JDDDDDDDDDDDDDDDDDDDDDDDI--JDDDDDDD
